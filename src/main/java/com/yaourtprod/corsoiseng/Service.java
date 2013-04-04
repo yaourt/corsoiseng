@@ -13,17 +13,20 @@ import java.util.regex.Pattern;
 
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableSet;
 
 @Named
 public class Service {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Service.class);
+
 	private static final String KEY_ANONYMOUS = "ANO"; 
 	private static final String KEY_FUCKEDUP = "FU";
 
-//	private final AtomicInteger aneCount = new AtomicInteger(0);
-//	private final AtomicInteger fuckedupCount = new AtomicInteger(0);
 	
 	/*package*/ static final Pattern pattern = Pattern.compile("[\\p{Alnum}\\p{Blank}'#]*");
 	
@@ -82,7 +85,13 @@ public class Service {
 	}
 	
 	public Corsoiseur get(final UUID uuid) {
-		return data.getIfPresent(uuid);
+		final Corsoiseur result = data.getIfPresent(uuid);
+		if(null != result)
+			LOGGER.debug("{} found => {}", uuid, result.getPseudo());
+		else
+			LOGGER.debug("{} not found", uuid);
+			
+		return result;
 	}
 	
 	private Corsoiseur getOrCreate(final UUID uuid, final String pseudo) throws ExecutionException {

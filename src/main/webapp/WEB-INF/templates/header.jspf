@@ -26,9 +26,10 @@
 <!-- Content Goes Here ! -->
 <div class="container-fluid">
 <!--  Title -->
-<div class="row-fluid">
-	<h1 class="span6 offset3">The Next Generation Online Corsoise</h1>
+<div class="row-fluid text-center">
+	<h1 class="span12">The Next Generation Online Corsoise</h1>
 </div>
-<div class="row-fluid">
-	<img src="/static/pietra.png" alt="pietra" width="200" height="219"/>
+<div class="row-fluid text-center">
+  <img src="/static/pietra.png" alt="pietra" width="200" height="219"/>
 </div>
+
