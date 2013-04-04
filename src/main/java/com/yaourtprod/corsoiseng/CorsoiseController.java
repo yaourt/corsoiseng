@@ -23,7 +23,12 @@ public class CorsoiseController {
 	
 	@RequestMapping("/")
 	public String root() {
-		return "index";
+		if(CorsoiseSecurity.isSignedIn()) {
+			return "index";
+		} else {
+			return "signIn";
+		}
+		
 	}
 	
 	@RequestMapping("/signIn")

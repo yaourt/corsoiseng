@@ -1,6 +1,5 @@
 package com.yaourtprod.corsoiseng;
 
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,11 +11,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Named;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableSet;
-
-import javax.inject.Named;
 
 @Named
 public class Service {
@@ -86,10 +85,10 @@ public class Service {
 		return data.getIfPresent(uuid);
 	}
 	
-	private Corsoiseur getOrCreate(final String pseudo) throws ExecutionException {
+	private Corsoiseur getOrCreate(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
 		final Corsoiseur c =
-			data.get(lpseudo, new Callable<Corsoiseur>() {
+			data.get(uuid, new Callable<Corsoiseur>() {
 				public Corsoiseur call() throws Exception {
 					return new Corsoiseur(lpseudo);
 				}
@@ -113,40 +112,40 @@ public class Service {
 		});
 	}
 
-	public OthersAndMe incCombienKilEst(final String pseudo) throws ExecutionException {
+	public OthersAndMe incCombienKilEst(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).incCombienKilest();
+		getOrCreate(uuid, lpseudo).incCombienKilest();
 		return getAll(lpseudo);
 	}
 
-	public OthersAndMe incPietra(final String pseudo) throws ExecutionException {
+	public OthersAndMe incPietra(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).incPietra();
+		getOrCreate(uuid, lpseudo).incPietra();
 		return getAll(lpseudo);
 	}
 
-	public OthersAndMe incTerrine(final String pseudo) throws ExecutionException {
+	public OthersAndMe incTerrine(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).incTerrine();
+		getOrCreate(uuid, lpseudo).incTerrine();
 		return getAll(lpseudo);
 	}
 
-	public OthersAndMe decCombienKilEst(final String pseudo) throws ExecutionException {
+	public OthersAndMe decCombienKilEst(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).decCombienKilest();
+		getOrCreate(uuid, lpseudo).decCombienKilest();
 		return getAll(lpseudo);
 	}
 
-	public OthersAndMe decPietra(final String pseudo) throws ExecutionException {
+	public OthersAndMe decPietra(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).decPietra();
+		getOrCreate(uuid, lpseudo).decPietra();
 		return getAll(lpseudo);
 
 	}
 
-	public OthersAndMe decTerrine(final String pseudo) throws ExecutionException {
+	public OthersAndMe decTerrine(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(lpseudo).decTerrine();
+		getOrCreate(uuid, lpseudo).decTerrine();
 		return getAll(lpseudo);
 	}
 }
