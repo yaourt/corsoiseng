@@ -12,6 +12,9 @@
 
     <!-- Portable static resource handler -->
 	<mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
+	
+	<!-- Favicon -->
+	<mvc:resources mapping="/favicon.ico" location="/static/" cache-period="31556926"/>
 
 	<mvc:annotation-driven/>
 
