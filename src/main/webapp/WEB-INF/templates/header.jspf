@@ -15,7 +15,7 @@
     <!-- Bootstrap Theme from http://bootswatch.com/slate/ -->
     <link href="/static/css/bootstrap.min.slate.css" rel="stylesheet">
     <!-- Application CSS -->
-    <!--<link href="/static/css/application.css" rel="stylesheet" media="screen">-->
+    <!-- <link href="/static/css/corsoiseng.css" rel="stylesheet" media="screen">-->
 
 </head>
 <body>

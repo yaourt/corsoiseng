@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CorsoiseController {
@@ -27,26 +29,43 @@ public class CorsoiseController {
 	
 	@RequestMapping("/")
 	public String root() {
+		LOGGER.debug("/ called");
 		if(CorsoiseSecurity.isSignedIn()) {
 			LOGGER.debug("Routing to index");
 			return "index";
 		} else {
-			LOGGER.debug("Routing to signIn");
-			return "redirect:/signIn";
+			LOGGER.debug("Forwarding to signIn");
+			return "forward:/signIn";
 		}
 	}
 	
 	@RequestMapping("/signIn")
 	public String signIn(@RequestParam(required = false) final String pseudo, final Model model, final HttpServletResponse response) throws Exception {
+		LOGGER.debug("/signIn called");
 		if(null != pseudo) {
 			final String lpseudo = service.normalizePseudo(pseudo);
 			final UUID uid = service.uuid(pseudo); 
 	
 			addAuthCookie(uid, lpseudo, response);
+			service.create(uid, lpseudo);
+			LOGGER.debug("{}:{} created !", uid, lpseudo);
+			
+			LOGGER.debug("Redirecting to /");
 			return "redirect:/";
 		} else {
+			LOGGER.debug("Routing to signIn");
 			return "signIn";
 		}
+	}
+	
+	@RequestMapping(value = "/data.json", method = RequestMethod.GET, produces="application/json")
+	@ResponseBody
+	public OthersAndMe data() {
+		final String pseudo = CorsoiseSecurity.getPseudo();
+		final OthersAndMe result = service.getAll(pseudo);
+		
+		return result;
+		
 	}
 	
 	private void addAuthCookie(final UUID uuid, final String pseudo, HttpServletResponse response) {

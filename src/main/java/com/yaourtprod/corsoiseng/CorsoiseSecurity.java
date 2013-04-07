@@ -2,10 +2,13 @@ package com.yaourtprod.corsoiseng;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.util.StringUtils;
 
 public class CorsoiseSecurity {
+	private static final Logger LOGGER = LoggerFactory.getLogger(CorsoiseSecurity.class);
 
 	private static class UserInfo {
 		String pseudo;
@@ -29,6 +32,7 @@ public class CorsoiseSecurity {
 		userInfo.pseudo = pseudo;
 		userInfo.uid = uuid;
 		user.set(userInfo);
+		LOGGER.debug("User Set {}:{}", uuid, pseudo);
 	}
 
 	public static boolean isUserSignedIn(final String pseudo) {

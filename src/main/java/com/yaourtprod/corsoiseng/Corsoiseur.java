@@ -1,5 +1,7 @@
 package com.yaourtprod.corsoiseng;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Corsoiseur {
 	private final String pseudo;
@@ -15,14 +17,17 @@ public class Corsoiseur {
 		return pseudo;
 	}
 
+	@JsonProperty("count")
 	public int getCombienKilEst() {
 		return combienkilest;
 	}
 
+	@JsonProperty("pietra")
 	public int getCombienKilNenveuLaPietra() {
 		return pietra;
 	}
 
+	@JsonProperty("terrine")
 	public int getCombienKilNenveuLaTerrine() {
 		return terrine;
 	}
