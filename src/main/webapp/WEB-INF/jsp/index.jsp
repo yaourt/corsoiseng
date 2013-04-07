@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<div class="row-fluid" ng-controller="CorsoiseNGCtrl">
 	<table class="table table-striped table-bordered span6 offset3" >
 		<thead>
 			<tr>
@@ -9,29 +9,29 @@
 			</tr>
 			<tr class="warning">
 				<th colspan="2">Total</th>
-				<th>{{sum.count}}</th>
-				<th>{{sum.pietra}}</th>
-				<th>{{sum.terrine}}</th>
+				<th><p class="text-right">{{corsoisengData.sum.count}}</p></th>
+				<th><p class="text-right">{{corsoisengData.sum.pietra}}</p></th>
+				<th><p class="text-right">{{corsoisengData.sum.terrine}}</p></th>
 			</tr>
 			
 		</thead>
 		<tbody>
 			<tr class="info">
-				<td colspan="2" rowspan="2">Moi<br />({{me.pseudo}})</td>
-				<td>{{me.count}}</td>
-				<td>{{me.pietra}}</td>
-				<td>{{me.terrine}}</td>
+				<td colspan="2" rowspan="2">Moi<br />({{corsoisengData.me.pseudo}})</td>
+				<td><p class="text-right">{{corsoisengData.me.count}}</p></td>
+				<td><p class="text-right">{{corsoisengData.me.pietra}}</p></td>
+				<td><p class="text-right">{{corsoisengData.me.terrine}}</p></td>
 			</tr>
 			<tr class="info">
-				<td><p class="text-center"><a class="btn" href="/incCount">+1</a>&nbsp;<a class="btn" href="/decCount">-1</a></p></td>
-				<td><p class="text-center"><a class="btn" href="/incPietra">+1</a>&nbsp;<a class="btn" href="/decPietra">-1</a></p></td>
-				<td><p class="text-center"><a class="btn" href="/incTerrine">+1</a>&nbsp;<a class="btn" href="/decTerrine">-1</a></p></td>
+				<td><p class="text-center"><a class="btn" ng-click="incCount()">+1</a>&nbsp;<a class="btn" ng-click="decCount()">-1</a></p></td>
+				<td><p class="text-center"><a class="btn" ng-click="incPietra()">+1</a>&nbsp;<a class="btn" ng-click="decPietra()">-1</a></p></td>
+				<td><p class="text-center"><a class="btn" ng-click="incTerrine()">+1</a>&nbsp;<a class="btn" ng-click="decTerrine()">-1</a></p></td>
 			</tr>
-			<tr ng-repeat="other int others">
+			<tr ng-repeat="other in corsoisengData.others">
 				<td colspan="2">{{other.pseudo}}</td>
-				<td>{{other.count}}</td>
-				<td>{{other.pietra}}</td>
-				<td>{{other.terrine}}</td>
+				<td><p class="text-right">{{other.count}}</p></td>
+				<td><p class="text-right">{{other.pietra}}</p></td>
+				<td><p class="text-right">{{other.terrine}}</p></td>
 			</tr>
 		</tbody>
 	</table>

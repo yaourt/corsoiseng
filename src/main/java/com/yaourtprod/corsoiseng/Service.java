@@ -94,13 +94,7 @@ public class Service {
 		return result;
 	}
 
-	public Corsoiseur create(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		return getOrCreate(uuid, pseudo);
-	}
-
-	private Corsoiseur getOrCreate(final UUID uuid, final String pseudo)
-			throws ExecutionException {
+	public Corsoiseur create(final UUID uuid, final String pseudo) throws ExecutionException {
 		final String lpseudo = normalizePseudo(pseudo);
 		final Corsoiseur c = data.get(uuid, new Callable<Corsoiseur>() {
 			public Corsoiseur call() throws Exception {
@@ -126,46 +120,45 @@ public class Service {
 		});
 	}
 
-	public OthersAndMe incCombienKilEst(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).incCombienKilest();
-		return getAll(lpseudo);
+	public void incCombienKilEst(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.incCombienKilest();
+		}
 	}
 
-	public OthersAndMe incPietra(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).incPietra();
-		return getAll(lpseudo);
+	public void incPietra(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.incPietra();
+		}
 	}
 
-	public OthersAndMe incTerrine(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).incTerrine();
-		return getAll(lpseudo);
+	public void incTerrine(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.incTerrine();
+		}
 	}
 
-	public OthersAndMe decCombienKilEst(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).decCombienKilest();
-		return getAll(lpseudo);
+	public void decCombienKilEst(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.decCombienKilest();
+		}
 	}
 
-	public OthersAndMe decPietra(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).decPietra();
-		return getAll(lpseudo);
-
+	public void decPietra(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.decPietra();
+		}
 	}
 
-	public OthersAndMe decTerrine(final UUID uuid, final String pseudo)
-			throws ExecutionException {
-		final String lpseudo = normalizePseudo(pseudo);
-		getOrCreate(uuid, lpseudo).decTerrine();
-		return getAll(lpseudo);
+	public void decTerrine(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.decTerrine();
+		}
 	}
 }

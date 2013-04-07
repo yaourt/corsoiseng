@@ -1,6 +1,7 @@
 package com.yaourtprod.corsoiseng;
 
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +67,42 @@ public class CorsoiseController {
 		
 		return result;
 		
+	}
+	
+	@RequestMapping(value="/incCount")
+	public void incCount() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.incCombienKilEst(uuid);
+	}
+
+	@RequestMapping(value="/decCount")
+	public void decCount() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.decCombienKilEst(uuid);
+	}
+	
+	@RequestMapping(value="/incPietra")
+	public void incPietra() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.incPietra(uuid);
+	}
+
+	@RequestMapping(value="/decPietra")
+	public void decPietra() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.decPietra(uuid);
+	}
+	
+	@RequestMapping(value="/incTerrine")
+	public void incTerrine() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.incTerrine(uuid);
+	}
+
+	@RequestMapping(value="/decTerrine")
+	public void decTerrine() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.decTerrine(uuid);
 	}
 	
 	private void addAuthCookie(final UUID uuid, final String pseudo, HttpServletResponse response) {
