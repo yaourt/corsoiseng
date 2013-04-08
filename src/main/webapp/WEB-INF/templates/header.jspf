@@ -34,20 +34,3 @@
 <div class="row-fluid text-center">
   <img src="/static/pietra.png" alt="pietra" width="200" height="219"/>
 </div>
-    <!-- Ruler -->
-    <div class="row-fluid">
-        <div class="span1" style="background:pink">01</div>
-        <div class="span1" style="background:pink">02</div>
-        <div class="span1" style="background:pink">03</div>
-        <div class="span1" style="background:pink">04</div>
-        <div class="span1" style="background:pink">05</div>
-        <div class="span1" style="background:pink">06</div>
-        <div class="span1" style="background:pink">07</div>
-        <div class="span1" style="background:pink">08</div>
-        <div class="span1" style="background:pink">09</div>
-        <div class="span1" style="background:pink">10</div>
-        <div class="span1" style="background:pink">11</div>
-        <div class="span1" style="background:pink">12</div>
-    </div>
-
-
