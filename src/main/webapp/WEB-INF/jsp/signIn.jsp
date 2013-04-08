@@ -10,7 +10,7 @@
 						class="input-large"
 						name="pseudo"
 						id="pseudo">
-					<span class="help-block">Seulement des lettres / chiffres / ' / #</span>
+					<span class="help-block">Seulement des lettres / chiffres / ' / # / [ / ] / :</span>
 				</div>
 			</div>
 			<div class="control-group">
