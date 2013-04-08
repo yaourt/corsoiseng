@@ -2,6 +2,8 @@ package com.yaourtprod.corsoiseng;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.Callable;
@@ -11,14 +13,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.util.HtmlUtils;
 
+import com.google.common.base.Ticker;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableMap;
 
 @Named
 public class Service {
@@ -26,38 +31,54 @@ public class Service {
 
 	private static final String KEY_ANONYMOUS = "ANO";
 	private static final String KEY_FUCKEDUP = "FU";
+	
+	private Ticker ticker = Ticker.systemTicker();
 
-	/* package */static final Pattern pattern = Pattern
-			.compile("[\\p{Alnum}\\p{Blank}'#]*");
+	/* package */static final Pattern pattern = Pattern.compile("[\\p{Alnum}\\p{Blank}'#\\[\\]:]*");
 
-	private final Cache<UUID, Corsoiseur> data;
+	private Cache<UUID, Corsoiseur> data;
 
-	private final Cache<String, AtomicInteger> counters;
+	private Cache<String, AtomicInteger> counters;
 
 	public Service() {
-		this.data = CacheBuilder.newBuilder()
-				.expireAfterWrite(8, TimeUnit.HOURS).maximumSize(200).build();
+	}
+	
+	@PostConstruct
+	/* package */ void init() {
+		this.data = CacheBuilder
+				.newBuilder()
+				.expireAfterWrite(8, TimeUnit.HOURS)
+				.maximumSize(200)
+				.ticker(this.ticker)
+				.build();
 
-		this.counters = CacheBuilder.newBuilder()
-				.expireAfterWrite(8, TimeUnit.HOURS).maximumSize(2).build();
+		this.counters = CacheBuilder
+				.newBuilder()
+				.expireAfterWrite(8, TimeUnit.HOURS)
+				.maximumSize(2)
+				.ticker(this.ticker)
+				.build();
+	}
+	
+	/* package */ void setTicker(final Ticker ticker) {
+		this.ticker = ticker;
 	}
 
 	public UUID uuid(final String pseudo) throws NoSuchAlgorithmException {
 		final UUID uuid = UUID.randomUUID();
-		// final MessageDigest digester = MessageDigest.getInstance("SHA-1");
-		// final byte[] digest = digester.digest(uuid.getBytes());
-		//
 		return uuid;
 	}
 
-	public String normalizePseudo(final String pseudo)
-			throws ExecutionException {
-		if (null == pseudo || pseudo.isEmpty()) {
+	public String normalizePseudo(final String pseudo) throws ExecutionException {
+		if (null == pseudo || pseudo.trim().isEmpty()) {
 			return "Ann Onymous #" + getAnonymousCounter().incrementAndGet();
 		} else {
-			final String lpseudo = pseudo.trim();
+			String lpseudo = pseudo.trim();
 			final Matcher m = Service.pattern.matcher(lpseudo);
 			if (m.matches()) {
+				if(lpseudo.length() > 40) {
+					lpseudo = HtmlUtils.htmlEscape(lpseudo.substring(0, 40) + "...");
+				}
 				return lpseudo;
 			} else {
 				return "Fucked up #" + getFuckedupCounter().incrementAndGet();
@@ -65,33 +86,37 @@ public class Service {
 		}
 	}
 
-	public OthersAndMe getAll(final String pseudo) {
-		final Set<Corsoiseur> result = ImmutableSet.copyOf(data.asMap()
-				.values());
+	public OthersAndMe getAll(final UUID uuid) {
+		final Map<UUID, Corsoiseur> result = ImmutableMap.copyOf(data.asMap());
+		
 		Set<Corsoiseur> others = new HashSet<Corsoiseur>(result.size());
 		Corsoiseur me = null;
-		if (null != pseudo) {
-			for (final Corsoiseur c : result) {
-				if (pseudo.equals(c.getPseudo())) {
-					me = c;
+		if (null != uuid) {
+			for(final Entry<UUID, Corsoiseur> entry : result.entrySet()) {
+				if(entry.getKey().equals(uuid)) {
+					me = entry.getValue();
 				} else {
-					others.add(c);
+					others.add(entry.getValue());
 				}
 			}
 		} else {
-			others = ImmutableSet.copyOf(result);
+			others.addAll(result.values()); 
 		}
 		return new OthersAndMe(me, others);
 	}
 
 	public Corsoiseur get(final UUID uuid) {
-		final Corsoiseur result = data.getIfPresent(uuid);
-		if (null != result)
-			LOGGER.debug("{} found => {}", uuid, result.getPseudo());
-		else
-			LOGGER.debug("{} not found", uuid);
-
-		return result;
+		if(null != uuid) {
+			final Corsoiseur result = data.getIfPresent(uuid);
+			if (null != result)
+				LOGGER.debug("{} found => {}", uuid, result.getPseudo());
+			else
+				LOGGER.debug("{} not found", uuid);
+	
+			return result;
+		} else {
+			return null;
+		}
 	}
 
 	public Corsoiseur create(final UUID uuid, final String pseudo) throws ExecutionException {
@@ -104,7 +129,7 @@ public class Service {
 		return c;
 	}
 
-	private AtomicInteger getAnonymousCounter() throws ExecutionException {
+	/* package */ AtomicInteger getAnonymousCounter() throws ExecutionException {
 		return counters.get(KEY_ANONYMOUS, new Callable<AtomicInteger>() {
 			public AtomicInteger call() throws Exception {
 				return new AtomicInteger(0);
@@ -112,7 +137,7 @@ public class Service {
 		});
 	}
 
-	private AtomicInteger getFuckedupCounter() throws ExecutionException {
+	/* package */ AtomicInteger getFuckedupCounter() throws ExecutionException {
 		return counters.get(KEY_FUCKEDUP, new Callable<AtomicInteger>() {
 			public AtomicInteger call() throws Exception {
 				return new AtomicInteger(0);

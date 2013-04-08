@@ -62,8 +62,8 @@ public class CorsoiseController {
 	@RequestMapping(value = "/data.json", method = RequestMethod.GET, produces="application/json")
 	@ResponseBody
 	public OthersAndMe data() {
-		final String pseudo = CorsoiseSecurity.getPseudo();
-		final OthersAndMe result = service.getAll(pseudo);
+		final UUID uuid = CorsoiseSecurity.getUid();
+		final OthersAndMe result = service.getAll(uuid);
 		
 		return result;
 		
