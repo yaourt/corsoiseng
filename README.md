@@ -1,8 +1,10 @@
-CorsoiseNG
+CorsoiseNG [![Build Status](https://travis-ci.org/yaourt/corsoiseng.png)](https://travis-ci.org/yaourt/corsoiseng)
 ==========
 
 Next Generation Online Corsoise
-[![Build Status](https://travis-ci.org/yaourt/corsoiseng.png)](https://travis-ci.org/yaourt/corsoiseng)
+-------------------------------
+
+
 
 This is a webapp dedicated to a restricted number of people who are used to meet at "La Corsoise" (http://goo.gl/hmhIZ).
 
