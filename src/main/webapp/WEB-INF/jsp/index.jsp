@@ -1,5 +1,5 @@
 <div class="row-fluid" ng-controller="CorsoiseNGCtrl">
-  <div class="span6 offset3">
+  <div class="span8 offset2">
 	<table class="table table-striped table-bordered" >
 		<thead>
 			<tr>
