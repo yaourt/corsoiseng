@@ -34,7 +34,7 @@ public class Service {
 	
 	private Ticker ticker = Ticker.systemTicker();
 
-	/* package */static final Pattern pattern = Pattern.compile("[\\p{Alnum}\\p{Blank}'#\\[\\]:]*");
+	/* package */static final Pattern PATTERN = Pattern.compile("[\\p{Alnum}\\p{Blank}'#\\[\\]:]*");
 
 	private Cache<UUID, Corsoiseur> data;
 
@@ -74,7 +74,7 @@ public class Service {
 			return "Ann Onymous #" + getAnonymousCounter().incrementAndGet();
 		} else {
 			String lpseudo = pseudo.trim();
-			final Matcher m = Service.pattern.matcher(lpseudo);
+			final Matcher m = Service.PATTERN.matcher(lpseudo);
 			if (m.matches()) {
 				if(lpseudo.length() > 40) {
 					lpseudo = HtmlUtils.htmlEscape(lpseudo.substring(0, 40) + "...");
