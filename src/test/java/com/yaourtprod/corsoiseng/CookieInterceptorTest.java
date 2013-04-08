@@ -29,7 +29,7 @@ public class CookieInterceptorTest {
 	public void before() {
 		MockitoAnnotations.initMocks(this);
 		this.undertest = new CookieInterceptor(serviceMock);
-		
+		CorsoiseSecurity.clean();
 	}
 	
 	@Test
