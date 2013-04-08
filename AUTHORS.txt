@@ -1,0 +1,4 @@
+List of known committers:
+
+Yaourt <yaourt@yaourtprod.net>
+
