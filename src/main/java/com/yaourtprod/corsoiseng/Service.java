@@ -18,6 +18,7 @@ import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.HtmlUtils;
 
 import com.google.common.base.Ticker;
@@ -31,14 +32,15 @@ public class Service {
 
 	private static final String KEY_ANONYMOUS = "ANO";
 	private static final String KEY_FUCKEDUP = "FU";
-	
-	private Ticker ticker = Ticker.systemTicker();
-
 	/* package */static final Pattern PATTERN = Pattern.compile("[\\p{Alnum}\\p{Blank}'#\\[\\]:]*");
+
+	private Ticker ticker = Ticker.systemTicker();
 
 	private Cache<UUID, Corsoiseur> data;
 
 	private Cache<String, AtomicInteger> counters;
+	
+	private TotozService totozService;
 
 	public Service() {
 	}
@@ -60,6 +62,11 @@ public class Service {
 				.build();
 	}
 	
+	@Autowired
+	/* package */ void setTotozService(final TotozService totozService) {
+		this.totozService = totozService;
+	}
+	
 	/* package */ void setTicker(final Ticker ticker) {
 		this.ticker = ticker;
 	}
@@ -71,17 +78,17 @@ public class Service {
 
 	public String normalizePseudo(final String pseudo) throws ExecutionException {
 		if (null == pseudo || pseudo.trim().isEmpty()) {
-			return "Ann Onymous #" + getAnonymousCounter().incrementAndGet();
+			return new StringBuilder("Ann Onymous #").append(getAnonymousCounter().incrementAndGet()).toString();
 		} else {
 			String lpseudo = pseudo.trim();
 			final Matcher m = Service.PATTERN.matcher(lpseudo);
 			if (m.matches()) {
 				if(lpseudo.length() > 40) {
-					lpseudo = HtmlUtils.htmlEscape(lpseudo.substring(0, 40) + "...");
+					lpseudo = HtmlUtils.htmlEscape(new StringBuilder(lpseudo.substring(0, 40)).append("...").toString());
 				}
 				return lpseudo;
 			} else {
-				return "Fucked up #" + getFuckedupCounter().incrementAndGet();
+				return new StringBuilder("Fucked up #").append(getFuckedupCounter().incrementAndGet()).toString();
 			}
 		}
 	}
@@ -123,7 +130,8 @@ public class Service {
 		final String lpseudo = normalizePseudo(pseudo);
 		final Corsoiseur c = data.get(uuid, new Callable<Corsoiseur>() {
 			public Corsoiseur call() throws Exception {
-				return new Corsoiseur(lpseudo);
+				final String displayablePseudo = totozService.processTotoz(lpseudo);
+				return new Corsoiseur(displayablePseudo);
 			}
 		});
 		return c;

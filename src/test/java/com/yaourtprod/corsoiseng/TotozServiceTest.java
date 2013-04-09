@@ -5,10 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.regex.Matcher;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TotozServiceTest {
@@ -17,6 +14,7 @@ public class TotozServiceTest {
 	@Before
 	public void before() {
 		undertest = new TotozService();
+		undertest.init();
 	}
 
 	@Test
@@ -54,38 +52,17 @@ public class TotozServiceTest {
 	}
 	
 	@Test
-	@Ignore
 	public void processTotozTest() {
 		String input = null;
 		String result = null;
+
+		assertNull(undertest.checkedTotozes.getIfPresent("http://totoz.eu/img/totoz"));
 		
-		input ="blah blah blah [:1st totoz], blah blah blah [:   2nd   totoz] and [:last tototz]";
+		input ="blah blah [:depardieu:3] blah [:totoz] blah [: LAST totoz123] blah blah!";
 		result = undertest.processTotoz(input);
 		
-		assertEquals("pif", result);
-	}
-	
-	@Test
-	@Ignore
-	public void patternTest() {
-		Matcher m = null;
+		assertEquals("blah blah <img class=\"totoz\" src=\"http://totoz.eu/img/depardieu%3A3\" /> blah <img class=\"totoz\" src=\"http://totoz.eu/img/totoz\" /> blah  blah blah!", result);
 		
-		m = TotozService.PATTERN.matcher("totoz");
-		assertFalse(m.matches());
-
-		m = TotozService.PATTERN.matcher("[:totoz]");
-		assertTrue(m.matches());
-
-		m = TotozService.PATTERN.matcher("blah blah [:totoz] blah blah");
-		assertTrue(m.matches());
-		
-		m = TotozService.PATTERN.matcher("blah blah [:totoz] blah [:totoz] blah [:totoz]");
-		int count = 0;
-		while(m.find()) {
-			System.out.println("Start : " + m.start() + ", End : " + m.end());
-			count++;
-		}
-		assertEquals(1, count);
+		assertTrue(undertest.checkedTotozes.getIfPresent("http://totoz.eu/img/totoz"));
 	}
-
 }

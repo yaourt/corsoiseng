@@ -37,7 +37,14 @@ public class ServiceTest {
 	public void before() {
 		this.ticker = new TickerForTest();
 		undertest = new Service();
+		
 		undertest.setTicker(ticker);
+		
+		final TotozService totozService = new TotozService();
+		totozService.init();
+		
+		undertest.setTotozService(totozService);
+		
 		undertest.init();
 	}
 	
@@ -178,6 +185,5 @@ public class ServiceTest {
 		assertNull(result.getMe());
 		assertNotNull(result.getOthers());
 		assertEquals(0, result.getOthers().size());
-
 	}
 }

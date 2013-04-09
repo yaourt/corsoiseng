@@ -3,3 +3,8 @@
   margin: 0 auto !important;
   float: none !important;
 }
+
+img .totoz {
+	max-width: 80px;
+	max-height: 80px;
+}
