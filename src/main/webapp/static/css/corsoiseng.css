@@ -4,7 +4,7 @@
   float: none !important;
 }
 
-img .totoz {
-	max-width: 80px;
-	max-height: 80px;
+.totoz {
+	max-width: 40px;
+	max-height: 40px;
 }
