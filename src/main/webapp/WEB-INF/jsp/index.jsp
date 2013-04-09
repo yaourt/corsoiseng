@@ -17,7 +17,7 @@
 				<th><p class="text-right">{{corsoisengData.sum.terrine}}</p></th>
 			</tr>
 			<tr class="info">
-				<td class="vcenter"><a class="btn btn-mini" href="#" title="Admin headshot !"><i class="icon-trash icon-white"></i></a>&nbsp;<a class="btn btn-mini" href="#" title="Cpa moi, m'a trompé"><i class="icon-minus icon-white"></i></a></td>
+				<td class="vcenter"><a class="btn btn-mini" href="#" title="Admin headshot !"><i class="icon-trash icon-white"></i></a>&nbsp;<a class="btn btn-mini" title="Cpa moi, m'a trompé" ng-click="deleteMe()"><i class="icon-minus icon-white"></i></a></td>
 				<td class="vcenter">Moi<br /><span ng-bind-html-unsafe="corsoisengData.me.pseudo"</span></td>
 				<td><p class="text-right">{{corsoisengData.me.count}}</p><p class="text-center"><a class="btn" ng-click="incCount()">+1</a>&nbsp;<a class="btn" ng-click="decCount()">-1</a></p></td>
 				<td><p class="text-right">{{corsoisengData.me.pietra}}</p><p class="text-center"><a class="btn" ng-click="incPietra()">+1</a>&nbsp;<a class="btn" ng-click="decPietra()">-1</a></p></td>

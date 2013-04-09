@@ -136,6 +136,12 @@ public class Service {
 		});
 		return c;
 	}
+	
+	public void delete(final UUID uuid) {
+		if(null != uuid) {
+			data.invalidate(uuid);
+		}
+	}
 
 	/* package */ AtomicInteger getAnonymousCounter() throws ExecutionException {
 		return counters.get(KEY_ANONYMOUS, new Callable<AtomicInteger>() {

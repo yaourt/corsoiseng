@@ -19,39 +19,38 @@
         updateData();
         
         function incCount() {
-            $http.get('/incCount');
-        	updateData();
+            $http.get('/incCount').success(function(){updateData();});
         }
         $scope.incCount = incCount;
         
         function decCount() {
-            $http.get('/decCount');
-        	updateData();
+            $http.get('/decCount').success(function(){updateData();});
         }
         $scope.decCount = decCount;
         
         function incPietra() {
-            $http.get('/incPietra');
-        	updateData();
+            $http.get('/incPietra').success(function(){updateData();});
         }
         $scope.incPietra = incPietra;
         
         function decPietra() {
-            $http.get('/decPietra');
-        	updateData();
+            $http.get('/decPietra').success(function(){updateData();});
         }
         $scope.decPietra = decPietra;
         
         function incTerrine() {
-            $http.get('/incTerrine');
-        	updateData();
+            $http.get('/incTerrine').success(function(){updateData();});
         }
         $scope.incTerrine = incTerrine;
         
         function decTerrine() {
-            $http.get('/decTerrine');
-        	updateData();
+            $http.get('/decTerrine').success(function(){updateData();});
         }
         $scope.decTerrine = decTerrine;
+
+        function deleteMe() {
+            $http.get('/deleteMe').success(function(){updateData();});
+        }
+        $scope.deleteMe = deleteMe;
     }
 })();

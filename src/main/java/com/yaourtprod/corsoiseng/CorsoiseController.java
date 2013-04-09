@@ -104,6 +104,14 @@ public class CorsoiseController {
 		service.decTerrine(uuid);
 	}
 	
+	@RequestMapping(value="/deleteMe")
+	public void deleteMe() {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		if(null != uuid) {
+			service.delete(uuid);
+		}
+	}
+	
 	private void addAuthCookie(final UUID uuid, final String pseudo, HttpServletResponse response) {
 		CorsoiseSecurity.setUser(pseudo, uuid);
 
