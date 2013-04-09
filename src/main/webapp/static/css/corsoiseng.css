@@ -13,3 +13,7 @@
 	max-width: 200px;
 	max-height: 200px;
 }
+
+td.vcenter {
+	vertical-align: middle;
+}

@@ -17,13 +17,15 @@
 				<th><p class="text-right">{{corsoisengData.sum.terrine}}</p></th>
 			</tr>
 			<tr class="info">
-				<td colspan="2">Moi<br /><span ng-bind-html-unsafe="corsoisengData.me.pseudo"</span></td>
+				<td class="vcenter"><a class="btn btn-mini" href="#" title="Admin headshot !"><i class="icon-trash icon-white"></i></a>&nbsp;<a class="btn btn-mini" href="#" title="Cpa moi, m'a trompé"><i class="icon-minus icon-white"></i></a></td>
+				<td class="vcenter">Moi<br /><span ng-bind-html-unsafe="corsoisengData.me.pseudo"</span></td>
 				<td><p class="text-right">{{corsoisengData.me.count}}</p><p class="text-center"><a class="btn" ng-click="incCount()">+1</a>&nbsp;<a class="btn" ng-click="decCount()">-1</a></p></td>
 				<td><p class="text-right">{{corsoisengData.me.pietra}}</p><p class="text-center"><a class="btn" ng-click="incPietra()">+1</a>&nbsp;<a class="btn" ng-click="decPietra()">-1</a></p></td>
 				<td><p class="text-right">{{corsoisengData.me.terrine}}</p><p class="text-center"><a class="btn" ng-click="incTerrine()">+1</a>&nbsp;<a class="btn" ng-click="decTerrine()">-1</a></p></td>
 			</tr>
 			<tr ng-repeat="other in corsoisengData.others">
-				<td colspan="2"><span ng-bind-html-unsafe="other.pseudo"</span></td>
+				<td class="vcenter"><a class="btn btn-mini" href="#"><i class="icon-trash icon-white"></i> </a></td>
+				<td class="vcenter"><span ng-bind-html-unsafe="other.pseudo"</span></td>
 				<td><p class="text-right">{{other.count}}</p></td>
 				<td><p class="text-right">{{other.pietra}}</p></td>
 				<td><p class="text-right">{{other.terrine}}</p></td>
