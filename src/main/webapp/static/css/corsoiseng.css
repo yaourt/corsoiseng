@@ -8,3 +8,8 @@
 	max-width: 40px;
 	max-height: 40px;
 }
+
+.totoz:hover {
+	max-width: 200px;
+	max-height: 200px;
+}
