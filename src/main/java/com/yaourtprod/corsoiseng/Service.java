@@ -136,6 +136,19 @@ public class Service {
 		});
 		return c;
 	}
+	
+//	/* package */ String getHeadshotID(final UUID uuid) {
+//		final String struuid = uuid.toString();
+//		final String[] items = struuid.split("-");
+//		String a = "7b414bb7-2ce2-4459-b3ae-ee87a6fc25e8";
+//		String b = "B00BACCE-551B-1EC1-A551-F1EDD1AB011C";
+//	}
+	
+	public void delete(final UUID uuid) {
+		if(null != uuid) {
+			data.invalidate(uuid);
+		}
+	}
 
 	/* package */ AtomicInteger getAnonymousCounter() throws ExecutionException {
 		return counters.get(KEY_ANONYMOUS, new Callable<AtomicInteger>() {
