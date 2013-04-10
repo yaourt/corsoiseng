@@ -3,9 +3,9 @@
 
     var corsoiseng = angular.module('corsoiseng', [ ]);
     
-    corsoiseng.controller('CorsoiseNGCtrl', ['$scope', '$http', '$timeout', '$log', CorsoiseNGCtrl]);
+    corsoiseng.controller('CorsoiseNGCtrl', ['$scope', '$http', '$timeout', '$log', '$window', CorsoiseNGCtrl]);
 
-    function CorsoiseNGCtrl($scope, $http, $timeout, $log) {
+    function CorsoiseNGCtrl($scope, $http, $timeout, $log, $window) {
         function updateData() {
             $http
             .get('/data.json')
@@ -49,7 +49,14 @@
         $scope.decTerrine = decTerrine;
 
         function deleteMe() {
-            $http.get('/deleteMe').success(function(){updateData();});
+            $http
+            .get('/deleteMe')
+            .success(
+            		function(){
+            			updateData();
+            			$window.location.href = '/signIn';
+            		}
+            );
         }
         $scope.deleteMe = deleteMe;
         
