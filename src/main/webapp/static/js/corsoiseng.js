@@ -3,9 +3,9 @@
 
     var corsoiseng = angular.module('corsoiseng', [ ]);
     
-    corsoiseng.controller('CorsoiseNGCtrl', ['$scope', '$http', CorsoiseNGCtrl]);
+    corsoiseng.controller('CorsoiseNGCtrl', ['$scope', '$http', '$timeout', '$log', CorsoiseNGCtrl]);
 
-    function CorsoiseNGCtrl($scope, $http) {
+    function CorsoiseNGCtrl($scope, $http, $timeout, $log) {
         function updateData() {
             $http
             .get('/data.json')
@@ -52,5 +52,23 @@
             $http.get('/deleteMe').success(function(){updateData();});
         }
         $scope.deleteMe = deleteMe;
+        
+        // Ping
+        function randomLimitedInt() {
+        	var val = 0;
+        	while(val < 15 || val > 45) {
+        		val = Math.floor((Math.random()*100)+1);
+        	}
+        	return val;
+        }
+        var ping = function() {
+        	var randomTO = randomLimitedInt();
+        	$log.info("Ping ongoing, next ping in " + randomTO + " minutes");
+        	pinger = $timeout(ping, 1000 * 60 * randomTO);
+        	$http.get('/ping').success(function(){$log.info("Ping done")});
+        };
+        
+        var pinger = $timeout(ping, 1000 * 60 * randomLimitedInt());
+
     }
 })();

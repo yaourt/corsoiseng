@@ -112,6 +112,14 @@ public class CorsoiseController {
 		}
 	}
 	
+	@RequestMapping(value="/ping")
+	@ResponseBody
+	public String ping() {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		LOGGER.info("Ping from {}", null != uuid ? uuid : "Anonymous");
+		return "pong";
+	}
+
 	private void addAuthCookie(final UUID uuid, final String pseudo, HttpServletResponse response) {
 		CorsoiseSecurity.setUser(pseudo, uuid);
 
