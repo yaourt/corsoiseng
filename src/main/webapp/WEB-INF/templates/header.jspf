@@ -41,16 +41,9 @@
   </map>
 
   <div id="myCarousel" class="carousel slide span8 offset2" ng-show="show">
-  	<!--
-    <ol class="carousel-indicators">
-      <li ng-repeat="bm in bms" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active: $first}"></li>
-    </ol>
-    -->
-    <!-- Carousel items -->
     <div class="carousel-inner">
       <div class="item" ng-repeat="bm in bms" ng-class="{active: $first}"><img ng-src="{{bm}}" class="bm"/></div>
     </div>
-    <!-- Carousel nav -->
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
   </div>
