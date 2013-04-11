@@ -5,15 +5,24 @@
 }
 
 .totoz {
-	max-width: 40px;
+	max-width:  40px;
 	max-height: 40px;
 }
 
 .totoz:hover {
-	max-width: 200px;
+	max-width:  200px;
 	max-height: 200px;
 }
 
 td.vcenter {
 	vertical-align: middle;
 }
+
+.bm {
+	max-width:  200px;
+	max-height: 219px;
+}
+
+.carousel-inner { text-align: center; }
+
+.carousel .item > img { display: inline-block; }

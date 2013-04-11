@@ -1,10 +1,13 @@
 package com.yaourtprod.corsoiseng;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.stream.XMLStreamException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yaourtprod.corsoiseng.rss.BMFeed;
+
 @Controller
 public class CorsoiseController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CorsoiseController.class);
@@ -23,8 +28,15 @@ public class CorsoiseController {
 	private final Service service;
 	
 	@Autowired
+	private BMFeed bmfeed;
+	
+	@Autowired
 	public CorsoiseController(final Service service) {
 		this.service = service;
+	}
+	
+	public void setBMFeed(final BMFeed bmfeed) {
+		this.bmfeed = bmfeed;
 	}
 	
 	@RequestMapping("/")
@@ -118,6 +130,15 @@ public class CorsoiseController {
 		final UUID uuid = CorsoiseSecurity.getUid();
 		LOGGER.info("Ping from {}", null != uuid ? uuid : "Anonymous");
 		return "pong";
+	}
+
+	@RequestMapping(value="/bm.json", method = RequestMethod.GET, produces="application/json")
+	public Collection<String> bm() throws XMLStreamException, IOException {
+		if(null != bmfeed) {
+			return bmfeed.getPicturesURLs();
+		} else {
+			return null;
+		}
 	}
 
 	private void addAuthCookie(final UUID uuid, final String pseudo, HttpServletResponse response) {

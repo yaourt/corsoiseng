@@ -31,6 +31,27 @@
 <div class="row-fluid text-center">
 	<h1 class="span12">The Next Generation Online Corsoise</h1>
 </div>
-<div class="row-fluid text-center">
-  <img src="/static/pietra.png" alt="pietra" width="200" height="219"/>
+<!-- Logo -->
+<div class="row-fluid text-center" ng-controller="BMCtrl">
+  <img src="/static/pietra.png" alt="pietra" width="200" height="219" usemap="#bmmap" ng-show="!show"/>
+  <map name="bmmap" ng-show="!show">
+    <area shape="rect" coords="37,20,55,39" ng-click="showBM();" href="#"/>
+    <area shape="rect" coords="35,138,49,150" ng-click="showBM();" href="#"/>
+    <area shape="rect" coords="136,147,148,161" ng-click="showBM();" href="#"/>
+  </map>
+
+  <div id="myCarousel" class="carousel slide span8 offset2" ng-show="show">
+  	<!--
+    <ol class="carousel-indicators">
+      <li ng-repeat="bm in bms" data-target="#myCarousel" data-slide-to="{{$index}}" ng-class="{active: $first}"></li>
+    </ol>
+    -->
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+      <div class="item" ng-repeat="bm in bms" ng-class="{active: $first}"><img ng-src="{{bm}}" class="bm"/></div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  </div>
 </div>

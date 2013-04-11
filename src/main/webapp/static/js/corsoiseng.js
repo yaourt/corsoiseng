@@ -76,6 +76,26 @@
         };
         
         var pinger = $timeout(ping, 1000 * 60 * randomLimitedInt());
-
     }
+    
+    /**** BM ****/
+    corsoiseng.controller('BMCtrl', ['$scope', '$http', '$log', BMCtrl]);
+
+    function BMCtrl($scope, $http, $log) {
+    	$http
+        .get('/bm.json')
+        .success(
+            function(data) {
+                $scope.bms = data.stringList;
+            }
+        );
+    	$scope.show = false;
+    	
+    	function showBM() {
+    		$scope.show = true;
+    		$log.info("BM clicked !");
+    	}
+    	$scope.showBM = showBM;
+    }
+
 })();
