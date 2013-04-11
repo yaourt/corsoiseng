@@ -28,21 +28,59 @@
 <!-- Content Goes Here ! -->
 <div class="container-fluid">
 <!--  Title -->
-<div class="row-fluid text-center">
-	<h1 class="span12">The Next Generation Online Corsoise</h1>
+<div class="row-fluid">
+	<div class="span1">
+		<!-- Help button -->
+		<a title="Help" class="btn btn-mini" data-toggle="modal" href="#modalHelp"><i class="icon-question-sign icon-white"></i></a>
+	</div>
+	<span class="text-center" ><h1>The Next Generation Online Corsoise</h1></span>
 </div>
+
+<!-- Help Content -->
+<div id="modalHelp" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+    <h3 id="myModalLabel">Help</h3>
+  </div>
+  <div class="modal-body">
+  	<h4>Pseudo</h4>
+    <p>
+    Comme annonc&eacute;, seuls les caract&egrave;res suivants sont autoris&eacute;s:
+      <ul>
+        <li>Lettres</li>
+        <li>Chiffres</li>
+        <li>Espace</li>
+        <li>[ et ] (Crochets)</li>
+        <li>' (Simple guillemet)</li>
+        <li># (Di&egrave;se)</li>
+      </ul>
+    </p>
+    
+    <h4>Easter Eggs</h4>
+    <p>Quelques easter eggs se cachent ...</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
 <!-- Logo -->
 <div class="row-fluid text-center" ng-controller="BMCtrl">
   <img src="/static/pietra.png" alt="pietra" width="200" height="219" usemap="#bmmap" ng-show="!show"/>
   <map name="bmmap" ng-show="!show">
-    <area shape="rect" coords="37,20,55,39" ng-click="showBM();" href="#"/>
-    <area shape="rect" coords="35,138,49,150" ng-click="showBM();" href="#"/>
-    <area shape="rect" coords="136,147,148,161" ng-click="showBM();" href="#"/>
+    <area shape="rect" coords="37,20,55,39" ng-click="toggleBM();" href="#"/>
+    <area shape="rect" coords="35,138,49,150" ng-click="toggleBM();" href="#"/>
+    <area shape="rect" coords="136,147,148,161" ng-click="toggleBM();" href="#"/>
   </map>
 
   <div id="myCarousel" class="carousel slide span8 offset2" ng-show="show">
     <div class="carousel-inner">
-      <div class="item" ng-repeat="bm in bms" ng-class="{active: $first}"><img ng-src="{{bm}}" class="bm"/></div>
+      <div class="item" ng-repeat="bm in bms" ng-class="{active: $first}">
+        <img ng-src="{{bm}}" class="bm"/>
+        <div class="carousel-caption text-left">
+          <a title="Hide" class="btn btn-mini" ng-click="toggleBM();"><i class="icon-remove icon-white"></i> Hide</a> Cachez donc ce sein que je ne saurais voir ...
+        </div>
+      </div>
     </div>
     <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
     <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>

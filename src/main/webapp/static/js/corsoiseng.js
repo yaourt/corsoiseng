@@ -91,11 +91,11 @@
         );
     	$scope.show = false;
     	
-    	function showBM() {
-    		$scope.show = true;
+    	function toggleBM() {
+    		$scope.show = !$scope.show;
     		$log.info("BM clicked !");
     	}
-    	$scope.showBM = showBM;
+    	$scope.toggleBM = toggleBM;
     }
 
 })();

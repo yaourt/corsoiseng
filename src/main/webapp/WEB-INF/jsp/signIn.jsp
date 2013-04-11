@@ -10,12 +10,15 @@
 						class="input-large"
 						name="pseudo"
 						id="pseudo">
-					<span class="help-block">Seulement des lettres / chiffres / ' / # / [ / ] / :</span>
+					<span class="help-block">Limitations :
+					<!-- Help button -->
+						<a title="Help" class="btn btn-mini" data-toggle="modal" href="#modalHelp"><i class="icon-question-sign icon-white"></i></a>
+					</span>
 				</div>
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" class="btn btn-primary">Oh oui, soumets-moi !</button>
+					<button type="submit" class="btn btn-primary btn-mini">Oh oui, soumets-moi !</button>
 				</div>
 			</div>
 	</form>
