@@ -78,7 +78,7 @@
       <div class="item" ng-repeat="bm in bms" ng-class="{active: $first}">
         <img ng-src="{{bm}}" class="bm"/>
         <div class="carousel-caption text-left">
-          <a title="Hide" class="btn btn-mini" ng-click="toggleBM();"><i class="icon-remove icon-white"></i> Hide</a> Cachez donc ce sein que je ne saurais voir ...
+          <a title="Hide" class="btn btn-mini" ng-click="toggleBM();"><i class="icon-remove icon-white"></i> Hide</a> Couvrez ce sein que je ne saurais voir.
         </div>
       </div>
     </div>
