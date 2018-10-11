@@ -27,7 +27,7 @@ public class BMFeedTest {
 		assertFalse(result.isEmpty());
 		for(final String str : result) {
 			LOGGER.debug("Image link : {}", str);
-			assertTrue(str.startsWith("http://"));
+			assertTrue(str.startsWith("https://"));
 		}
 		assertFalse(feed.data.asMap().isEmpty());
 	}
