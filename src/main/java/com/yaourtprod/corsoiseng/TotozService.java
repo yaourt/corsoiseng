@@ -14,6 +14,7 @@ import javax.inject.Named;
 import com.google.common.base.Ticker;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.springframework.web.util.UriUtils;
 
 @Named
 public class TotozService {
@@ -66,7 +67,7 @@ public class TotozService {
 			StringBuilder strb = null;
 			try {
 				strb = new StringBuilder(TOTOZ_URL_PREFIX)
-						.append(URLEncoder.encode(
+						.append(UriUtils.encodePath(
 									totoz.substring(2, totoz.length()-1),
 									"UTF-8"
 								)

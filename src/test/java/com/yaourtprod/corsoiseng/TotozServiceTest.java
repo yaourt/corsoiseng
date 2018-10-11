@@ -43,11 +43,11 @@ public class TotozServiceTest {
 		assertEquals(TotozService.TOTOZ_URL_PREFIX+totoz, undertest.buildTotozURL(delimitedTotoz));
 
 		delimitedTotoz = "[:pas glop]";
-		totoz = "pas+glop";
+		totoz = "pas%20glop";
 		assertEquals(TotozService.TOTOZ_URL_PREFIX+totoz, undertest.buildTotozURL(delimitedTotoz));
 
 		delimitedTotoz = "[:pas >glop]";
-		totoz = "pas+%3Eglop";
+		totoz = "pas%20%3Eglop";
 		assertEquals(TotozService.TOTOZ_URL_PREFIX+totoz, undertest.buildTotozURL(delimitedTotoz));
 	}
 	
@@ -61,8 +61,23 @@ public class TotozServiceTest {
 		input ="blah blah [:depardieu:3] blah [:totoz] blah [: LAST totoz123] blah blah!";
 		result = undertest.processTotoz(input);
 		
-		assertEquals("blah blah <img class=\"totoz\" src=\"https://totoz.eu/img/depardieu%3A3\" /> blah <img class=\"totoz\" src=\"https://totoz.eu/img/totoz\" /> blah  blah blah!", result);
+		assertEquals("blah blah <img class=\"totoz\" src=\"https://totoz.eu/img/depardieu:3\" /> blah <img class=\"totoz\" src=\"https://totoz.eu/img/totoz\" /> blah  blah blah!", result);
 		
+		assertTrue(undertest.checkedTotozes.getIfPresent("https://totoz.eu/img/totoz"));
+	}
+
+	@Test
+	public void processTotoz2Test() {
+		String input = null;
+		String result = null;
+
+		assertNull(undertest.checkedTotozes.getIfPresent("https://totoz.eu/img/et%20mes%20fesses%20tu%20les%20aimes"));
+
+		input ="blah blah [:et mes fesses tu les aimes] blah [:totoz] blah [: LAST totoz123] blah blah!";
+		result = undertest.processTotoz(input);
+
+		assertEquals("blah blah <img class=\"totoz\" src=\"https://totoz.eu/img/et%20mes%20fesses%20tu%20les%20aimes\" /> blah <img class=\"totoz\" src=\"https://totoz.eu/img/totoz\" /> blah  blah blah!", result);
+
 		assertTrue(undertest.checkedTotozes.getIfPresent("https://totoz.eu/img/totoz"));
 	}
 }
