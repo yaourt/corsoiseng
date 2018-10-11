@@ -56,13 +56,13 @@ public class TotozServiceTest {
 		String input = null;
 		String result = null;
 
-		assertNull(undertest.checkedTotozes.getIfPresent("http://totoz.eu/img/totoz"));
+		assertNull(undertest.checkedTotozes.getIfPresent("https://totoz.eu/img/totoz"));
 		
 		input ="blah blah [:depardieu:3] blah [:totoz] blah [: LAST totoz123] blah blah!";
 		result = undertest.processTotoz(input);
 		
-		assertEquals("blah blah <img class=\"totoz\" src=\"http://totoz.eu/img/depardieu%3A3\" /> blah <img class=\"totoz\" src=\"http://totoz.eu/img/totoz\" /> blah  blah blah!", result);
+		assertEquals("blah blah <img class=\"totoz\" src=\"https://totoz.eu/img/depardieu%3A3\" /> blah <img class=\"totoz\" src=\"https://totoz.eu/img/totoz\" /> blah  blah blah!", result);
 		
-		assertTrue(undertest.checkedTotozes.getIfPresent("http://totoz.eu/img/totoz"));
+		assertTrue(undertest.checkedTotozes.getIfPresent("https://totoz.eu/img/totoz"));
 	}
 }

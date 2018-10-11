@@ -18,7 +18,7 @@ import com.google.common.cache.CacheBuilder;
 @Named
 public class TotozService {
 	/* package */ static final Pattern PATTERN = Pattern.compile("\\[:(\\p{Alnum}|\\p{Space}|:|_)+\\]");
-	/* package */ static final String TOTOZ_URL_PREFIX = "http://totoz.eu/img/";
+	/* package */ static final String TOTOZ_URL_PREFIX = "https://totoz.eu/img/";
 	/* package */ static final String TOTOZ_HTML_PREFIX = "<img class=\"totoz\" src=\"";
 	/* package */ static final String TOTOZ_HTML_SUFFIX = "\" />";
 	
