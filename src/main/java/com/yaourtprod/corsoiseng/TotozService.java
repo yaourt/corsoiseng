@@ -56,10 +56,14 @@ public class TotozService {
 			int start = m.start();
 			int end = m.end();
 			String totoz = original.substring(start, end);
+			LOGGER.debug("Building Totoz URL for {}", totoz);
 			String url = buildTotozURL(totoz);
+			LOGGER.debug("Totoz URL : {}", url);
 			if(null != url && isRealTotoz(url)) {
+				LOGGER.debug("{} is a real Totoz URL, using it", url);
 				m.appendReplacement(strbuf, buildTotozHTML(url));
 			} else {
+				LOGGER.debug("{} is NOT a real Totoz URL, NOT using it", url);
 				m.appendReplacement(strbuf, "");
 			}
 		}
