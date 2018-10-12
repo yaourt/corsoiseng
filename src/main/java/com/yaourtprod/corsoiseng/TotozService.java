@@ -14,10 +14,14 @@ import javax.inject.Named;
 import com.google.common.base.Ticker;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.util.UriUtils;
 
 @Named
 public class TotozService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(TotozService.class);
+
 	/* package */ static final Pattern PATTERN = Pattern.compile("\\[:(\\p{Alnum}|\\p{Space}|:|_)+\\]");
 	/* package */ static final String TOTOZ_URL_PREFIX = "https://totoz.eu/img/";
 	/* package */ static final String TOTOZ_HTML_PREFIX = "<img class=\"totoz\" src=\"";
@@ -44,6 +48,7 @@ public class TotozService {
 
 
 	public String processTotoz(final String original) {
+		LOGGER.debug("Processing Totoz, input : {}", original);
 		final Matcher m = TotozService.PATTERN.matcher(original);
 		final StringBuffer strbuf = new StringBuffer();
 
@@ -59,7 +64,9 @@ public class TotozService {
 			}
 		}
 		m.appendTail(strbuf);
-		return strbuf.toString();
+		final String totozout = strbuf.toString();
+		LOGGER.debug("Processing Totoz, output : {}", totozout);
+		return totozout;
 	}
 	
 	/* package */ String buildTotozURL(final String totoz) {
