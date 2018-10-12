@@ -102,17 +102,21 @@ public class TotozService {
 				return checked;
 			}
 			try {
+				LOGGER.debug("Checking if Totoz URL exists ...");
 				HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 				con.setInstanceFollowRedirects(false);
 				con.setRequestMethod("HEAD");
 				if(HttpURLConnection.HTTP_OK == con.getResponseCode()) {
+					LOGGER.debug("{} exists !", url);
 					checkedTotozes.put(url, Boolean.TRUE);
 					return true;
 				} else {
+					LOGGER.debug("{} does NOT exist !", url);
 					checkedTotozes.put(url, Boolean.FALSE);
 					return false;
 				}
 			} catch (final Exception e) {
+				LOGGER.debug("An error occured, considering {} to do NOT exist", url, e);
 				checkedTotozes.put(url, Boolean.FALSE);
 				return false;
 			}
