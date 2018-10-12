@@ -8,6 +8,8 @@ public class Corsoiseur {
 	private int combienkilest = 1;
 	private int pietra = 0;
 	private int terrine = 0;
+	private int burger = 0;
+	private int tiramisu = 0;
 	
 	public Corsoiseur(final String pseudo) {
 		this.pseudo = pseudo;
@@ -31,7 +33,17 @@ public class Corsoiseur {
 	public int getCombienKilNenveuLaTerrine() {
 		return terrine;
 	}
-	
+
+	@JsonProperty("burger")
+	public int getCombienKilNenveuLeBurger() {
+		return burger;
+	}
+
+	@JsonProperty("tiramisu")
+	public int getCombienKilNenveuLeTiramisu() {
+		return tiramisu;
+	}
+
 	public void incCombienKilest() {
 		this.combienkilest++;
 	}
@@ -57,5 +69,23 @@ public class Corsoiseur {
 	public void decTerrine() {
 		if(this.terrine > 0)
 			this.terrine--;
+	}
+
+	public void incBurger() {
+		this.burger++;
+	}
+
+	public void decBurger() {
+		if(this.burger > 0)
+			this.burger--;
+	}
+
+	public void incTiramisu() {
+		this.tiramisu++;
+	}
+
+	public void decTiramisu() {
+		if(this.tiramisu > 0)
+			this.tiramisu--;
 	}
 }

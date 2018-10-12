@@ -187,6 +187,20 @@ public class Service {
 		}
 	}
 
+	public void incBurger(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.incBurger();
+		}
+	}
+
+	public void incTiramisu(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.incTiramisu();
+		}
+	}
+
 	public void decCombienKilEst(final UUID uuid) throws ExecutionException {
 		if(null != uuid) {
 			final Corsoiseur c = get(uuid);
@@ -205,6 +219,20 @@ public class Service {
 		if(null != uuid) {
 			final Corsoiseur c = get(uuid);
 			if(null != c) c.decTerrine();
+		}
+	}
+
+	public void decBurger(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.decBurger();
+		}
+	}
+
+	public void decTiramisu(final UUID uuid) throws ExecutionException {
+		if(null != uuid) {
+			final Corsoiseur c = get(uuid);
+			if(null != c) c.decTiramisu();
 		}
 	}
 }

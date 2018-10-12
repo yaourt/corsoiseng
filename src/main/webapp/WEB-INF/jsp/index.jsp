@@ -7,6 +7,8 @@
 				<th >Kombien Kil Sera ?</th>
 				<th >Kiki veut la Pietra ?</th>
 				<th >Kiki veut la Terrine ?</th>
+				<th >Kiki veut le Burger ?</th>
+				<th >Kiki veut le Tiramisu ?</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -15,13 +17,17 @@
 				<th><p class="text-right">{{corsoisengData.sum.count}}</p></th>
 				<th><p class="text-right">{{corsoisengData.sum.pietra}}</p></th>
 				<th><p class="text-right">{{corsoisengData.sum.terrine}}</p></th>
+				<th><p class="text-right">{{corsoisengData.sum.burger}}</p></th>
+				<th><p class="text-right">{{corsoisengData.sum.tiramisu}}</p></th>
 			</tr>
 			<tr class="info">
-				<td style="width:  8%" class="vcenter"><a class="btn btn-mini disabled" title="Admin headshot !"><i class="icon-trash icon-white"></i></a>&nbsp;<a class="btn btn-mini" title="Cpa moi, m'a trompé" ng-click="deleteMe()"><i class="icon-remove icon-white"></i></a></td>
-				<td style="width: 32%" class="vcenter">Moi<br /><span ng-bind-html-unsafe="corsoisengData.me.pseudo"</span></td>
-				<td style="width: 20%"><p class="text-right">{{corsoisengData.me.count}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incCount()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decCount()"><i class="icon-minus icon-white"></i></a></p></td>
-				<td style="width: 20%"><p class="text-right">{{corsoisengData.me.pietra}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incPietra()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decPietra()"><i class="icon-minus icon-white"></i></a></p></td>
-				<td style="width: 20%"><p class="text-right">{{corsoisengData.me.terrine}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incTerrine()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decTerrine()"><i class="icon-minus icon-white"></i></a></p></td>
+				<td style="width:  8%" class="vcenter"><a class="btn btn-mini disabled" title="Admin headshot !"><i class="icon-trash icon-white"></i></a>&nbsp;<a class="btn btn-mini" title="Cpa moi, m'a trompï¿½" ng-click="deleteMe()"><i class="icon-remove icon-white"></i></a></td>
+				<td style="width: 17%" class="vcenter">Moi<br /><span ng-bind-html-unsafe="corsoisengData.me.pseudo"</span></td>
+				<td style="width: 15%"><p class="text-right">{{corsoisengData.me.count}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incCount()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decCount()"><i class="icon-minus icon-white"></i></a></p></td>
+				<td style="width: 15%"><p class="text-right">{{corsoisengData.me.pietra}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incPietra()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decPietra()"><i class="icon-minus icon-white"></i></a></p></td>
+				<td style="width: 15%"><p class="text-right">{{corsoisengData.me.terrine}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incTerrine()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decTerrine()"><i class="icon-minus icon-white"></i></a></p></td>
+				<td style="width: 15%"><p class="text-right">{{corsoisengData.me.burger}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incBurger()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decBurger()"><i class="icon-minus icon-white"></i></a></p></td>
+				<td style="width: 15%"><p class="text-right">{{corsoisengData.me.tiramisu}}</p><p class="text-center"><a class="btn btn-mini" ng-click="incTiramisu()"><i class="icon-plus icon-white"></i></a>&nbsp;<a class="btn btn-mini" ng-click="decTiramisu()"><i class="icon-minus icon-white"></i></a></p></td>
 			</tr>
 			<tr ng-repeat="other in corsoisengData.others">
 				<td class="vcenter"><a class="btn btn-mini disabled" title="Admin headshot !"><i class="icon-trash icon-white"></i> </a></td>
@@ -29,6 +35,8 @@
 				<td><p class="text-right">{{other.count}}</p></td>
 				<td><p class="text-right">{{other.pietra}}</p></td>
 				<td><p class="text-right">{{other.terrine}}</p></td>
+				<td><p class="text-right">{{other.burger}}</p></td>
+				<td><p class="text-right">{{other.tiramisu}}</p></td>
 			</tr>
 		</tbody>
 	</table>

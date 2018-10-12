@@ -11,6 +11,8 @@ public class OthersAndMe {
 		int count = 0;
 		int pietra = 0;
 		int terrine = 0;
+		int burger = 0;
+		int tiramisu = 0;
 
 		public int getCount() {
 			return count;
@@ -23,6 +25,14 @@ public class OthersAndMe {
 		public int getTerrine() {
 			return terrine;
 		}
+
+		public int getBurger() {
+			return burger;
+		}
+
+		public int getTiramisu() {
+			return tiramisu;
+		}
 	}
 
 	public OthersAndMe(final Corsoiseur me, final Set<Corsoiseur> others) {
@@ -33,12 +43,16 @@ public class OthersAndMe {
 			this.sum.count += this.me.getCombienKilEst();
 			this.sum.pietra += this.me.getCombienKilNenveuLaPietra();
 			this.sum.terrine += this.me.getCombienKilNenveuLaTerrine();
+			this.sum.burger += this.me.getCombienKilNenveuLeBurger();
+			this.sum.tiramisu += this.me.getCombienKilNenveuLeTiramisu();
 		}
 		if (null != others) {
 			for (final Corsoiseur c : this.others) {
 				this.sum.count += c.getCombienKilEst();
 				this.sum.pietra += c.getCombienKilNenveuLaPietra();
 				this.sum.terrine += c.getCombienKilNenveuLaTerrine();
+				this.sum.burger += c.getCombienKilNenveuLeBurger();
+				this.sum.tiramisu += c.getCombienKilNenveuLeTiramisu();
 			}
 		}
 	}

@@ -48,6 +48,26 @@
         }
         $scope.decTerrine = decTerrine;
 
+        function incBurger() {
+            $http.get('/incBurger').success(function(){updateData();});
+        }
+        $scope.incBurger = incBurger;
+
+        function decBurger() {
+            $http.get('/decBurger').success(function(){updateData();});
+        }
+        $scope.decBurger = decBurger;
+
+        function incTiramisu() {
+            $http.get('/incTiramisu').success(function(){updateData();});
+        }
+        $scope.incTiramisu = incTiramisu;
+
+        function decTiramisu() {
+            $http.get('/decTiramisu').success(function(){updateData();});
+        }
+        $scope.decTiramisu = decTiramisu;
+
         function deleteMe() {
             $http
             .get('/deleteMe')

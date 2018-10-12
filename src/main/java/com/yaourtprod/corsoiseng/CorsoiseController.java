@@ -115,7 +115,31 @@ public class CorsoiseController {
 		final UUID uuid = CorsoiseSecurity.getUid();
 		service.decTerrine(uuid);
 	}
-	
+
+	@RequestMapping(value="/incBurger")
+	public void incBurger() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.incBurger(uuid);
+	}
+
+	@RequestMapping(value="/decBurger")
+	public void decBurger() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.decBurger(uuid);
+	}
+
+	@RequestMapping(value="/incTiramisu")
+	public void incTiramisu() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.incTiramisu(uuid);
+	}
+
+	@RequestMapping(value="/decTiramisu")
+	public void decTiramisu() throws ExecutionException {
+		final UUID uuid = CorsoiseSecurity.getUid();
+		service.decTiramisu(uuid);
+	}
+
 	@RequestMapping(value="/deleteMe")
 	public void deleteMe() {
 		final UUID uuid = CorsoiseSecurity.getUid();
